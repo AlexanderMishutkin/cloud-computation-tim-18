@@ -1,5 +1,11 @@
 # cloud-computation-tim-18
 
+## Comment from Alex (!!!!!!!!)
+
+This is SAM project. SAM is some console application done by Amazon to simplify work with lambdas. It can build, run them localy and deploy. But I use it only on git hub for now.
+
+## SAM docs:
+
 This project contains source code and supporting files for a serverless application that you can deploy with the SAM CLI. It includes the following files and folders.
 
 - hello-world - Code for the application's Lambda function written in TypeScript.

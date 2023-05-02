@@ -1,4 +1,7 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
+import AWS from 'aws-sdk';
+
+AWS.config.update({ region: "eu-central-1" })
 
 /**
  *
@@ -12,10 +15,23 @@ import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 
 export const lambdaHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     try {
+        const ddb = new AWS.DynamoDB({apiVersion: "2012-10-08"});
+        const params = {
+            TableName:"Users",
+            Key: {
+                id:{
+                    S: "1"
+                }
+            }
+        }
+        let user = await ddb.getItem(params).promise()
+        
+        console.log(user);
+
         return {
             statusCode: 200,
             body: JSON.stringify({
-                message: 'hello world',
+                user: user,
             }),
         };
     } catch (err) {
