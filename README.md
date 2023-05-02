@@ -1,8 +1,42 @@
 # cloud-computation-tim-18
 
-## Comment from Alex (!!!!!!!!)
+# Comment from Alex (!!!!!!!!)
 
-This is SAM project. SAM is some console application done by Amazon to simplify work with lambdas. It can build, run them localy and deploy. But I use it only on git hub for now.
+## How to run localy?
+
+Since we need Dynamo DB connection - you need to have AWS CLI installed and API keys set up. Install CLI, go to `IAM > users > YOUR_NAME > credentials` and create new API key. [Something like this](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html)
+
+After it you can normally run TS application, which is located in `hello-world` dir.
+
+```
+cd hello-world
+npm i
+npm run test
+```
+
+All the code is in `hello-world\app.ts` and `hello-world\common\*`, while test (that simply call lambda as the function) is in `hello-world\tests\unit\test-handler.test.ts`.
+Lambda will get the default event, that looks like http request. Event content is in  `events\event.json`.
+
+## How to deploy?
+
+After you test all the code locally, you can deploy lambda.
+
+### Deploy existing lambda
+
+You don't need to do anything. Really. I set up GitHub action for it. Any code on the `master` branch got deployed.
+
+Check deployment logs in [GitHub actions tub](https://github.com/AlexanderMishutkin/cloud-computation-tim-18/actions). Usually last run is yourth))
+
+### Deploy new lambda
+
+Then you need to describe your new lambda to SAM. Set up is in  `template.yaml` file.
+
+Here you need to change `Resources:` section to describe new lambda (just copy Hello World function and change 4 fields `CodeUri, Handler, Path, Method`).
+
+Also yoiu need to change `Outputs:` the same way - just copy everything from the `HelloWorld` and change the path (last part, that is `hello`) in `LambdaNameAPI` `Value:` property.
+
+<br/><br/><br/><br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
 ## SAM docs:
 
